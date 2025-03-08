@@ -1,0 +1,2 @@
+# ContaNova
+Software de contabilidad. 
