@@ -1,0 +1,62 @@
+/* =========================
+   IMPORTS (SIEMPRE PRIMERO)
+========================= */
+/* ❗ Si usas Google Fonts por CSS, van AQUÍ */
+/* @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"); */
+
+/* =========================
+   TAILWIND
+========================= */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================
+   BASE
+========================= */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-gray-800;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
+}
+
+  .animate-gradient-diagonal {
+    background-size: 300% 300%;
+    animation: gradient-diagonal 20s ease-in-out infinite;
+  }
+
+
+/* =========================
+   UTILIDADES
+========================= */
+
+@layer utilities {
+  @keyframes gradient-diagonal {
+    0% {
+      background-position: 100% 100%;
+    }
+    50% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 100% 100%;
+    }
+  }}
+
+/* =========================
+   COMPONENTES
+========================= */
+@layer components {
+  .container-max {
+    @apply mx-auto max-w-7xl px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-20;
+  }
+}
