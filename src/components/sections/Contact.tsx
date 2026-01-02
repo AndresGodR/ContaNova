@@ -48,7 +48,7 @@ export default function CTA() {
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               {/* Primary CTA */}
               <Link
-                href="/contacto"
+                href="/contact"
                 className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 text-base font-semibold text-primary transition-all duration-300 hover:-translate-y-1 hover:bg-gray-100 hover:shadow-xl"
               >
                 Contáctenos

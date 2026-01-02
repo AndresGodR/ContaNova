@@ -113,7 +113,7 @@ export default function Navbar() {
             <Link href="/#testimonios" className={navLink}>
               Testimonios
             </Link>
-            <Link href="/contacto" className={navLink}>
+            <Link href="/contact" className={navLink}>
               Contacto
             </Link>
           </nav>

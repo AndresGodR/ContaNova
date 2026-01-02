@@ -109,9 +109,6 @@ export default function ContactPage() {
             <div className="overflow-hidden rounded-3xl border bg-white">
               <div className="px-6 py-4">
                 <h3 className="text-lg font-bold text-gray-900">Ubicación</h3>
-                <p className="mt-1 text-sm text-gray-600">
-                  Podemos cambiar este mapa al enlace exacto de Google Business cuando lo tengas.
-                </p>
               </div>
 
               <div className="aspect-[16/10] w-full bg-gray-100">
@@ -120,7 +117,7 @@ export default function ContactPage() {
                   className="h-full w-full"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  src="https://www.google.com/maps?q=San%20Jos%C3%A9%2C%20Costa%20Rica&output=embed"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d245.62678401348026!2d-84.18295699191555!3d9.931580715600816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0fc031d40f985%3A0xc683a6d097f74087!2sConsorcio%20Jur%C3%ADdico%20Contable%20Godinez%20Y%20Asociados!5e0!3m2!1ses-419!2scr!4v1767309400791!5m2!1ses-419!2scr"
                 />
               </div>
             </div>
