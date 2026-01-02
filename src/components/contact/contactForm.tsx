@@ -265,10 +265,6 @@ export default function ContactForm() {
           <p className="mt-2">{errorMsg}</p>
         </div>
       )}
-
-      <p className="text-xs text-gray-500">
-        *Este formulario envía el mensaje a su correo configurado.
-      </p>
     </form>
   );
 }
