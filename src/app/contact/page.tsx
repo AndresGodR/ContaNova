@@ -36,7 +36,7 @@ export default function ContactPage() {
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4">
             <a
-              href="https://wa.me/50622823145"
+              href="https://wa.me/50687784635"
               target="_blank"
               className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 text-base font-semibold text-primary transition hover:bg-gray-100"
             >
@@ -63,7 +63,7 @@ export default function ContactPage() {
               Este formulario ya envía la información a una ruta interna (API).
               Luego lo conectamos a email o WhatsApp sin romper el diseño.
             </p>
-
+    
             <ContactForm />
           </div>
 
@@ -91,7 +91,7 @@ export default function ContactPage() {
 
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
                 <a
-                  href="https://wa.me/50622823145"
+                  href="https://wa.me/50687784635"
                   target="_blank"
                   className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 font-semibold text-primary transition hover:bg-gray-100"
                 >

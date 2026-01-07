@@ -120,7 +120,7 @@ export default function Navbar() {
 
           {/* CTA */}
           <a
-            href="https://wa.me/50622823145"
+            href="https://wa.me/50687784635"
             target="_blank"
             className={[
               "rounded-xl bg-primary px-5 py-3 text-base font-semibold text-white",

@@ -45,7 +45,7 @@ export default function ServicesPage() {
 
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
               <a
-                href="https://wa.me/50622823145"
+                href="https://wa.me/50687784635"
                 target="_blank"
                 className="inline-flex items-center justify-center rounded-md bg-white px-8 py-4 text-primary text-lg font-semibold transition hover:bg-light"
               >
