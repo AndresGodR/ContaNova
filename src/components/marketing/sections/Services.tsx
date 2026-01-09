@@ -59,7 +59,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="servicios" className="section-padding bg-gray-50">
+    <section id="servicios" className="section-padding scroll-mt-28 bg-gray-50">
       <div className="container-max">
         {/* Header */}
         <div className="mb-16 max-w-2xl">

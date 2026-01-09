@@ -16,7 +16,9 @@
 ========================= */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 96px; /* ajustar según el alto del navbar */
 }
+
 
 body {
   @apply bg-white text-gray-800;
