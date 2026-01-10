@@ -13,13 +13,15 @@ export default function ContactPage() {
       {/* HERO */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
-          <Image
-            src="/images/branding/acuerdo.jpg"
-            alt="Contacto - Godínez y Asociados"
-            fill
-            priority
-            className="object-cover"
-          />
+          <video
+          className="absolute inset-0 h-full w-full object-cover"
+          src="/eaglecontactvideo.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+        />
           <div className="absolute inset-0 bg-primary/70" />
           <div className="absolute inset-0 bg-gradient-to-tr from-primary/80 via-primary/35 to-black/25" />
         </div>

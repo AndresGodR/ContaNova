@@ -46,7 +46,7 @@ export default function Testimonials() {
   return (
     <section
       id="testimonios"
-      className="section-padding bg-white relative overflow-hidden"
+      className="section-padding bg-white scroll-mt-28"
     >
       <div className="container-max">
         {/* Header */}
