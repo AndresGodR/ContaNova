@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
+import Reveal from "@/components/ui/Reveal";
 
 function scrollToId(id: string) {
   const el = document.getElementById(id);
@@ -25,6 +26,17 @@ export default function Hero() {
         playsInline
         preload="auto"
       />
+      
+        {/* Eagle motif layers (encima del video/imagen) */}
+      <div className="pointer-events-none absolute inset-0">
+        {/* Halo */}
+        <div className="absolute -top-24 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full eagle-halo" />
+        {/* Streak diagonal tipo ala */}
+        <div className="absolute -right-40 top-16 h-[520px] w-[520px] rotate-12 eagle-streak" />
+        {/* Noise (ya tenés utility) */}
+        <div className="absolute inset-0 noise-overlay" />
+      </div>
+
 
   
         {/* 1) Base dark overlay (para contraste sin matar la imagen) */}
@@ -67,6 +79,7 @@ export default function Hero() {
                 Confianza • Precisión • Acompañamiento
               </motion.div>
 
+              <Reveal delay={0.05}>
               {/* Title (impacto premium) */}
               <motion.h1
                 initial={{ opacity: 0, y: 18 }}
@@ -80,6 +93,7 @@ export default function Hero() {
                   para familias y PYMES
                 </span>
               </motion.h1>
+              </Reveal> 
 
               {/* Subtitle */}
               <motion.p

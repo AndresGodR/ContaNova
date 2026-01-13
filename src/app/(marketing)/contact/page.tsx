@@ -61,10 +61,6 @@ export default function ContactPage() {
           {/* Formulario con lógica real */}
           <div className="rounded-3xl border bg-white p-8 shadow-sm">
             <h2 className="text-2xl font-bold text-primary">Envíenos un mensaje</h2>
-            <p className="mt-3 text-gray-600">
-              Este formulario ya envía la información a una ruta interna (API).
-              Luego lo conectamos a email o WhatsApp sin romper el diseño.
-            </p>
     
             <ContactForm />
           </div>
