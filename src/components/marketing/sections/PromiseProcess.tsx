@@ -1,135 +1,151 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ClipboardCheck, FileBarChart2, Workflow, Rocket } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 
-const steps = [
-  {
-    title: "Diagnóstico claro",
-    desc: "Entendemos su caso y prioridades. Sin vueltas.",
-    Icon: ClipboardCheck,
-  },
-  {
-    title: "Ejecución + control",
-    desc: "Procesos estandarizados, cumplimiento y trazabilidad.",
-    Icon: Workflow,
-  },
-  {
-    title: "Reportes útiles",
-    desc: "Información que sirve para decidir, no solo para archivar.",
-    Icon: FileBarChart2,
-  },
-  {
-    title: "Mejora continua",
-    desc: "Optimización constante con tecnología y automatización.",
-    Icon: Rocket,
-  },
+const bullets = [
+  "Un diagnóstico claro antes de ejecutar (sin sorpresas).",
+  "Procesos estandarizados + criterio profesional (calidad consistente).",
+  "Acompañamiento cercano con visión de negocio (familia y PYME).",
+  "Tecnología aplicada para ahorrar tiempo y reducir errores.",
 ];
 
-export default function PromiseProcess() {
+export default function Promise() {
   return (
-    <section className="section-padding relative overflow-hidden bg-white">
-      {/* Premium background accents */}
-      <div className="pointer-events-none absolute -top-24 left-1/2 h-80 w-[42rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-28 left-10 h-72 w-72 rounded-full bg-secondary/10 blur-3xl" />
+    <section className="relative overflow-hidden bg-white">
+      {/* ✅ TOP FADE: evita el “corte” visual con el TrustBar */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#eef3f8] via-white/70 to-white" />
 
-      <div className="container-max">
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
-          {/* Left: promise */}
-          <div className="lg:col-span-5">
-            <motion.div
-              initial={{ opacity: 0, y: 26 }}
+      {/* fondo sutil premium */}
+      <div className="pointer-events-none absolute -left-40 top-24 h-[520px] w-[520px] rounded-full bg-primary/10 blur-3xl" />
+      <div className="pointer-events-none absolute -right-40 bottom-0 h-[520px] w-[520px] rounded-full bg-sky-500/10 blur-3xl" />
+
+      <div className="container-max section-padding relative">
+        <div className="grid items-center gap-12 lg:grid-cols-2">
+          {/* Texto */}
+          <div>
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-120px" }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="text-xs font-semibold tracking-[0.22em] text-gray-500"
+            >
+              NUESTRA FORMA DE TRABAJAR
+            </motion.p>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-120px" }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-3 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900"
             >
-              <p className="inline-flex items-center rounded-full border border-black/10 bg-white px-4 py-2 text-sm font-semibold text-gray-800 shadow-sm">
-                Nuestra promesa
-              </p>
+              Precisión y estrategia para que su empresa avance con seguridad
+            </motion.h2>
 
-              <h2 className="mt-5 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
-                Una firma con ADN{" "}
-                <span className="text-primary">contable</span>,{" "}
-                <span className="text-primary">jurídico</span> y{" "}
-                <span className="text-primary">tecnológico</span>
-              </h2>
-
-              <p className="mt-5 text-lg text-gray-600 leading-relaxed">
-                Diseñamos un acompañamiento completo: cumplimiento y control,
-                pero también modernización para que su operación sea más simple,
-                ordenada y escalable.
-              </p>
-
-              <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                <Link
-                  href="/services"
-                  className="inline-flex items-center justify-center rounded-xl bg-primary px-7 py-4 text-base font-semibold text-white transition hover:bg-secondary hover:shadow-lg"
-                >
-                  Ver servicios
-                </Link>
-
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center rounded-xl border border-black/10 bg-white px-7 py-4 text-base font-semibold text-gray-900 transition hover:border-primary/25 hover:text-primary"
-                >
-                  Contáctenos
-                </Link>
-              </div>
-
-              <div className="mt-8 rounded-2xl border border-black/5 bg-gray-50 p-5">
-                <p className="text-sm font-semibold text-gray-900">
-                  Enfoque actual
-                </p>
-                <p className="mt-2 text-sm text-gray-600">
-                  Hoy resolvemos necesidades contables y legales. Mañana
-                  integramos automatización, reportes y módulos internos para
-                  profesionalizar aún más el servicio.
-                </p>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Right: process cards */}
-          <div className="lg:col-span-7">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-120px" }}
-              variants={{
-                hidden: {},
-                visible: { transition: { staggerChildren: 0.12 } },
-              }}
-              className="grid gap-6 sm:grid-cols-2"
+              transition={{ duration: 0.7, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-5 max-w-xl text-lg leading-relaxed text-gray-600"
             >
-              {steps.map(({ title, desc, Icon }) => (
+              Combinamos experiencia contable y legal con herramientas digitales
+              para entregar claridad, control y eficiencia. En cada paso, usted
+              sabe qué se hace, por qué se hace y qué impacto tiene.
+            </motion.p>
+
+            <div className="mt-7 grid gap-3">
+              {bullets.map((b, i) => (
                 <motion.div
-                  key={title}
-                  variants={{
-                    hidden: { opacity: 0, y: 24 },
-                    visible: {
-                      opacity: 1,
-                      y: 0,
-                      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-                    },
+                  key={b}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-120px" }}
+                  transition={{
+                    duration: 0.55,
+                    delay: 0.06 * i,
+                    ease: [0.16, 1, 0.3, 1],
                   }}
-                  className="group relative overflow-hidden rounded-3xl border border-black/5 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+                  className="flex items-start gap-3"
                 >
-                  <div className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-primary/35 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-                  <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary transition group-hover:bg-primary group-hover:text-white">
-                    <Icon className="h-6 w-6" />
-                  </div>
-
-                  <h3 className="text-xl font-bold text-gray-900">{title}</h3>
-                  <p className="mt-2 text-gray-600 leading-relaxed">{desc}</p>
-
-                  {/* subtle glow */}
-                  <div className="pointer-events-none absolute -bottom-14 -right-14 h-44 w-44 rounded-full bg-primary/10 blur-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 text-primary" />
+                  <p className="text-gray-700">{b}</p>
                 </motion.div>
               ))}
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-120px" }}
+              transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-10 flex flex-col gap-3 sm:flex-row"
+            >
+              <Link
+                href="/services"
+                className="group inline-flex items-center justify-center rounded-2xl bg-primary px-7 py-4 text-base font-semibold text-white transition hover:bg-secondary hover:-translate-y-0.5 hover:shadow-lg"
+              >
+                Ver áreas de servicio
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-0.5" />
+              </Link>
+
+              <a
+                href="https://wa.me/50622823145"
+                target="_blank"
+                className="inline-flex items-center justify-center rounded-2xl border border-black/10 bg-white px-7 py-4 text-base font-semibold text-gray-900 transition hover:border-primary/20 hover:text-primary hover:-translate-y-0.5 hover:shadow-sm"
+              >
+                Hablar con un asesor
+              </a>
             </motion.div>
           </div>
+
+          {/* Video card (placeholder listo) */}
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-120px" }}
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            className="relative"
+          >
+            {/* marco premium */}
+            <div className="absolute -inset-[1px] rounded-[28px] bg-gradient-to-r from-primary/25 via-sky-400/15 to-secondary/25" />
+            <div className="relative overflow-hidden rounded-[28px] border border-black/5 bg-white shadow-[0_50px_130px_-90px_rgba(0,0,0,0.75)]">
+              {/* header mini */}
+              <div className="flex items-center justify-between px-6 py-4 border-b border-black/5 bg-white/70">
+                <p className="text-sm font-semibold text-gray-900">
+                  Cómo se vive la experiencia
+                </p>
+                <span className="text-xs font-semibold text-gray-500">
+                  10–18s • Loop
+                </span>
+              </div>
+
+              {/* ✅ Reemplazá src por tu video cuando lo tengas */}
+              <div className="relative aspect-[16/10] w-full bg-gray-100">
+                <video
+                  className="h-full w-full object-cover"
+                  src="/videos/promise.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                />
+                {/* overlay para look corporativo */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#071b2d]/25 via-transparent to-white/10" />
+              </div>
+
+              <div className="px-6 py-5">
+                <p className="text-sm text-gray-600">
+                  Un vistazo rápido a nuestro estilo de trabajo: orden, claridad y
+                  enfoque en resultados.
+                </p>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

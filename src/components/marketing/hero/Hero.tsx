@@ -95,6 +95,7 @@ export default function Hero() {
               </motion.h1>
               </Reveal> 
 
+
               {/* Subtitle */}
               <motion.p
                 initial={{ opacity: 0, y: 16 }}
