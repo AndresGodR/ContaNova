@@ -28,7 +28,7 @@ const items = [
 
 export default function TrustBar() {
   return (
-    <section className="relative -mt-14 sm:-mt-16">
+    <section className="relative -mt-14 pb-6 z-20"> 
       <div className="container-max">
         <motion.div
           initial={{ opacity: 0, y: 22 }}

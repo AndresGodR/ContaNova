@@ -9,10 +9,9 @@ import { Menu, X, MapPin } from "lucide-react";
 type NavItem = { label: string; sectionId?: string; href?: string };
 
 const NAV_ITEMS: NavItem[] = [
-  { label: "Inicio", sectionId: "top" },
-  { label: "Servicios", sectionId: "servicios" },
-  { label: "Testimonios", sectionId: "testimonios" },
-  { label: "Contacto", href: "/contact" },
+  { label: "Inicio", sectionId: "top" },       // scroll suave solo en Home
+  { label: "Servicios", href: "/services" },   // ✅ ruta limpia
+  { label: "Contacto", href: "/contact" },     // ✅ ruta limpia
 ];
 
 const STORAGE_KEY = "gya:scrollTo";
@@ -32,9 +31,7 @@ function consumeScrollTarget(): string | null {
   }
 }
 
-/** Scroll suave sin # en URL */
 function scrollToSection(id: string) {
-  // "top" lo tratamos como inicio real
   if (id === "top") {
     window.scrollTo({ top: 0, behavior: "smooth" });
     return;
@@ -51,71 +48,22 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // ✅ C) Scroll progress bar (suave, sin jank)
+  // ✅ Progress bar premium
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, {
     stiffness: 180,
     damping: 30,
-    mass: 0.2,
+    mass: 0.22,
   });
 
-  // ✅ A) Active state con IntersectionObserver (solo en "/")
-  const [activeId, setActiveId] = useState<string>("top");
+  // Active “por ruta”
+  const isActive = (item: NavItem) => {
+    if (item.href) return pathname === item.href;
+    // para Inicio: activo solo si estás en "/"
+    return pathname === "/" && item.sectionId === "top";
+  };
 
-  const sectionIds = useMemo(
-    () => NAV_ITEMS.filter((x) => x.sectionId).map((x) => x.sectionId!) as string[],
-    []
-  );
-
-  useEffect(() => {
-    if (pathname !== "/") {
-      setActiveId("");
-      return;
-    }
-
-    const els = sectionIds
-      .map((id) => (id === "top" ? null : document.getElementById(id)))
-      .filter(Boolean) as HTMLElement[];
-
-    // Si no existen aún (render lento), reintenta en 1 frame
-    if (!els.length) {
-      requestAnimationFrame(() => setActiveId("top"));
-      return;
-    }
-
-    const obs = new IntersectionObserver(
-      (entries) => {
-        // Elegimos el que esté más visible
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => (b.intersectionRatio ?? 0) - (a.intersectionRatio ?? 0))[0];
-
-        if (visible?.target?.id) setActiveId(visible.target.id);
-        else if (window.scrollY < 80) setActiveId("top");
-      },
-      {
-        // Ajusta el “punto” en el que consideras activa una sección
-        root: null,
-        rootMargin: "-45% 0px -45% 0px",
-        threshold: [0.05, 0.1, 0.2, 0.35, 0.5],
-      }
-    );
-
-    els.forEach((el) => obs.observe(el));
-
-    // fallback “top” cuando estás arriba
-    const onScroll = () => {
-      if (window.scrollY < 80) setActiveId("top");
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    return () => {
-      obs.disconnect();
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, [pathname, sectionIds]);
-
-  // Scroll state (rAF) -> navbar compacto al bajar
+  // rAF scroll -> sin trabas
   const ticking = useRef(false);
   useEffect(() => {
     const onScroll = () => {
@@ -133,7 +81,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // consume scroll target cuando estás en /
+  // Consumir scroll target solo en Home
   useEffect(() => {
     if (pathname !== "/") return;
     const id = consumeScrollTarget();
@@ -161,16 +109,13 @@ export default function Navbar() {
 
   const desktopLink = isScrolled ? "text-[15px]" : "text-[16px]";
   const brandText = isScrolled ? "text-lg md:text-xl" : "text-xl md:text-2xl";
-
-  // helper: activo solo si estás en "/" y el item tiene sectionId
-  const isActive = (item: NavItem) =>
-    pathname === "/" && item.sectionId && (item.sectionId === activeId || (activeId === "top" && item.sectionId === "top"));
+  const logoSize = isScrolled ? "h-11 w-11" : "h-14 w-14";
 
   return (
     <header
       className={[
         "sticky top-0 z-50 w-full",
-        "h-20", // altura fija (sin reflow)
+        "h-20",
         "border-b backdrop-blur supports-[backdrop-filter]:bg-white/70",
         isScrolled
           ? "border-black/5 shadow-[0_14px_35px_-28px_rgba(0,0,0,0.55)]"
@@ -182,7 +127,7 @@ export default function Navbar() {
         willChange: "transform",
       }}
     >
-      {/* ✅ C) Progress bar */}
+      {/* Progress bar */}
       <div className="absolute inset-x-0 top-0 h-[2px] bg-black/5">
         <motion.div
           style={{ scaleX: progress, transformOrigin: "0% 50%" }}
@@ -190,7 +135,7 @@ export default function Navbar() {
         />
       </div>
 
-      {/* línea premium sutil */}
+      {/* linea sutil premium */}
       <div className="pointer-events-none absolute inset-x-0 top-[2px] h-px bg-gradient-to-r from-transparent via-primary/35 to-transparent" />
 
       <div className="container-max h-full flex items-center justify-between">
@@ -204,7 +149,7 @@ export default function Navbar() {
           <div
             className={[
               "relative overflow-hidden rounded-full ring-2 ring-primary/20 transition-all duration-300",
-              isScrolled ? "h-11 w-11" : "h-14 w-14", // ✅ h-14 existe -> no desaparece
+              logoSize,
               "group-hover:ring-primary/50",
             ].join(" ")}
           >
@@ -215,9 +160,7 @@ export default function Navbar() {
               className="object-cover"
               priority
             />
-            {/* brillo premium */}
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-white/0 via-white/0 to-white/35 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-            {/* glow sutil */}
             <div className="pointer-events-none absolute -inset-3 rounded-full bg-primary/15 blur-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           </div>
 
@@ -232,7 +175,7 @@ export default function Navbar() {
           </div>
         </button>
 
-        {/* Desktop nav */}
+        {/* Desktop */}
         <nav className="hidden md:flex items-center gap-1">
           {NAV_ITEMS.map((item) => {
             const active = isActive(item);
@@ -249,7 +192,7 @@ export default function Navbar() {
                   active ? "text-primary" : "text-gray-700 hover:text-primary",
                 ].join(" ")}
               >
-                {/* ✅ B) glass hover */}
+                {/* glass */}
                 <span
                   className={[
                     "pointer-events-none absolute inset-0 rounded-2xl",
@@ -259,27 +202,26 @@ export default function Navbar() {
                   ].join(" ")}
                 />
 
-                {/* ✅ B) borde animado “futurista” */}
+                {/* ring */}
                 <span
                   className={[
-                    "pointer-events-none absolute inset-0 rounded-2xl",
-                    "ring-1 ring-inset",
+                    "pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset",
                     active ? "ring-primary/25" : "ring-black/5 group-hover:ring-primary/20",
                     "transition duration-300",
                   ].join(" ")}
                 />
 
-                {/* underline neon */}
+                {/* underline */}
                 <span
                   className={[
-                    "pointer-events-none absolute inset-x-3 -bottom-[2px] h-[2px] origin-left rounded-full",
+                    "pointer-events-none absolute inset-x-4 -bottom-[2px] h-[2px] origin-left rounded-full",
                     "bg-gradient-to-r from-primary via-secondary to-primary",
                     active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100",
                     "transition-transform duration-300",
                   ].join(" ")}
                 />
 
-                {/* glow activo */}
+                {/* glow */}
                 <span
                   className={[
                     "pointer-events-none absolute -inset-2 rounded-2xl blur-xl",
@@ -316,7 +258,7 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Mobile */}
+        {/* Mobile toggle */}
         <button
           type="button"
           className="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-black/10 bg-white/70 text-gray-900"
@@ -335,7 +277,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.18 }}
-            className="md:hidden border-t border-black/5 bg-white/85 backdrop-blur"
+            className="md:hidden border-t border-black/5 bg-white/90 backdrop-blur"
           >
             <div className="container-max py-4 grid gap-2">
               {NAV_ITEMS.map((item) => (
@@ -343,7 +285,12 @@ export default function Navbar() {
                   key={item.label}
                   type="button"
                   onClick={() => handleNav(item)}
-                  className="w-full rounded-2xl px-4 py-3 text-left text-[16px] font-semibold text-gray-800 hover:bg-primary/10 hover:text-primary transition"
+                  className={[
+                    "w-full rounded-2xl px-4 py-3 text-left text-[16px] font-semibold transition",
+                    isActive(item)
+                      ? "bg-primary/10 text-primary"
+                      : "text-gray-800 hover:bg-primary/10 hover:text-primary",
+                  ].join(" ")}
                 >
                   {item.label}
                 </button>
